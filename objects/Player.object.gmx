@@ -33,6 +33,8 @@ vspd = 0;
 grav = 1.5;
 state = move_state;
 
+///Get the input
+get_input();
 </string>
           </argument>
         </arguments>
@@ -55,7 +57,10 @@ state = move_state;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Control the player's state
+            <string>/// Control the player's state
+get_input();
+
+// Execute the state
 script_execute(state);
 </string>
           </argument>
@@ -112,6 +117,34 @@ if (above_enemy &amp;&amp; (falling || state == ledge_grab_state)) {
         }
     }
     
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="4" ename="Exit">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Go to the next level
+
+if (up) {
+    y = yprevious;
+    state = exit_state;
 }
 </string>
           </argument>
