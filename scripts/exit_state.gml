@@ -5,6 +5,22 @@ if (image_alpha > 0) {
     if (room != room_last) {
         room_goto_next();
     } else {
-        game_restart();
+        // Calculate the score
+        score = PlayerStats.sapphires*1000 - floor(PlayerStats.time/room_speed);
+        
+        // Open the highscores
+        ini_open("Settings.ini");
+        PlayerStats.highscore = ini_read_real("Score", "Highscore", 0);
+        
+        // A new highscore case
+        if (score > PlayerStats.highscore) {
+            PlayerStats.highscore = score;
+            ini_write_real("Score", "Highscore", PlayerStats.highscore);
+        }
+        
+        // Close the ini file
+        ini_close();
+        
+        room_goto(rm_highscore);
     }
 }
